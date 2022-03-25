@@ -6,12 +6,12 @@ namespace Logo_Anl
 {
     class ML_Main
     {
-        public static Stack<string> ML_Hub(Stack<string> Output)
+        public static Stack<string> ML_Hub(Stack<string> Output, string Logo)
         {
             //create a single instance off the sample data 
             ModelInput sampleData = new ModelInput()
             {
-                ImageSource = @"C:\Users\Thom\Documents\sixth form\Computer science\Thom Johnson NEA\NEA\C#\ProtoInC\Business_Types\plumber\Plumber002.png",
+                ImageSource = @Logo,
             };
 
             var prediction = Model_Consumption.Predict(sampleData);

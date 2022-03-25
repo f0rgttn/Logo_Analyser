@@ -6,10 +6,10 @@ namespace Logo_Anl
 {
     public partial class Login : Form
     {
-        SqlConnection con;
+        //pull the sql connection string from program.cs
+        SqlConnection conn = new SqlConnection(Program.connString); //initially conn had to be written multiple time, but by pulling from a known string it tidies up the program
         SqlCommand cmd;
-        SqlDataReader dr;
-
+       
         public Login()
         {
             InitializeComponent();
@@ -17,33 +17,56 @@ namespace Logo_Anl
 
         private void Login_Load(object sender, EventArgs e)
         {
-            con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Thom\source\repos\Logo_Anl\Logo_Anl\UserBase.mdf;Integrated Security=True");
-            con.Open();
+
         }
 
         //textBox1 = username
-        public virtual string userName { get; set; }
 
         private void BtnLogin_Click(object sender, EventArgs e)
-        {
+        {     
             if (EntrPsswrd.Text != string.Empty || EntrUsrNm.Text != string.Empty)
             {
 
-                cmd = new SqlCommand("select * from UserTable where username='" + EntrUsrNm.Text + "' and password='" + EntrPsswrd.Text + "'", con);
-                dr = cmd.ExecuteReader();
-                if (dr.Read())
+                //declare the stored procedure command
+                cmd = new SqlCommand("dbo.usp_Login", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", EntrUsrNm.Text);
+                cmd.Parameters.AddWithValue("@password", EntrPsswrd.Text);
+                
+
+                //open the connection, run the command, store result into an int and evaluate it afterwards
+                conn.Open();
+
+                int loginResult = Convert.ToInt32(cmd.ExecuteScalar());   //ExecuteScalar means we expect one thing to be returned
+
+                conn.Close();
+
+                //display a message for success
+                if (loginResult == 1)
                 {
-                    dr.Close();
                     this.Hide();
-                    userName = EntrUsrNm.Text;
                     MenuScreen menuScreen = new MenuScreen();
                     menuScreen.ShowDialog();
                 }
                 else
                 {
-                    dr.Close();
-                    MessageBox.Show("No Account avilable with this username and password ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid Credentials");
                 }
+               
+                //dr = cmd.ExecuteReader();
+                //if (dr.Read())
+                //{
+                //    dr.Close();
+                //    this.Hide();
+                //    userName = EntrUsrNm.Text;
+                //    MenuScreen menuScreen = new MenuScreen();
+                //    menuScreen.ShowDialog();
+                //}
+                //else
+                //{
+                //    dr.Close();
+                //    MessageBox.Show("No Account avilable with this username and password ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
 
             }
             else
@@ -62,6 +85,13 @@ namespace Logo_Anl
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ForgotPassword_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ForgotPassword forgotPassword = new ForgotPassword();
+            forgotPassword.ShowDialog();
         }
     }
 }

@@ -200,23 +200,51 @@ namespace Logo_Anl
         //Provides the values for each and and every pixel in the logo
         private void getAllValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CheckPathFilled();
-            Image Logo = Image.FromFile(GetLogoPath());
-            List<string> pixel_colours = Colourimetrics.Colour(Logo, true);
-            colourimetricOutput(pixel_colours, Logo);
+            
         }
         //Provides the unique values for pixels
         private void getUniqueValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
+        }
+        //This will allow for the user 
+        private void rGBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetAllColourValue(true);
+        }
+
+        private void hSLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetAllColourValue(false);
+        }
+        //This will allow for the user to get the unique colour values only with data type RGB
+        private void rGBToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GetUniqueColourValues(true);
+        }
+        //This will allow for the user to get the unique colour values only with data type HSL
+        private void hSLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GetUniqueColourValues(false);
+        }
+
+        private void GetAllColourValue(bool GetRGB)
+        {
             CheckPathFilled();
             Image Logo = Image.FromFile(GetLogoPath());
-            List<string> pixel_colours = Colourimetrics.Colour(Logo, false);
+            List<string> pixel_colours = Colourimetrics.Colour(Logo, true, GetRGB);
             colourimetricOutput(pixel_colours, Logo);
         }
 
+        private void GetUniqueColourValues(bool GetRGB)
+        {
+            CheckPathFilled();
+            Image Logo = Image.FromFile(GetLogoPath());
+            List<string> pixel_colours = Colourimetrics.Colour(Logo, false, GetRGB);
+            colourimetricOutput(pixel_colours, Logo);
+        }
 
-
-
+        //Provides the user the colourimetric results with the correct specified colour data type and whether unique values or not.
         public void colourimetricOutput(List<string> pixel_colours, Image Logo)
         {
             pictureBox1.Image = Logo;
@@ -224,12 +252,15 @@ namespace Logo_Anl
             richTextBox1.Text = String.Join(Environment.NewLine, pixel_colours);
         }
 
+        //For classifying business types.
         private void classifyBusinessTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 Stack<string> Output = null;
-                ML_Main.ML_Hub(Output);
+                CheckPathFilled();
+                string Logo = GetLogoPath();
+                ML_Main.ML_Hub(Output, Logo);
 
                 while (Output.Count != 0)
                 {
@@ -274,5 +305,15 @@ namespace Logo_Anl
         {
             Close();
         }
+    }
+
+    class History
+    {
+        public History()
+        {
+
+        }
+
+
     }
 }

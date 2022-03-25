@@ -38,11 +38,10 @@ namespace Logo_Anl
 
         private static List<Color> ColoursIn = new List<Color>();
         private static List<Color> ColoursOnce = new List<Color>();
-        private static List<string> NamedColours = new List<string>();
-        private static List<string> Dict_list = new List<string>();
+        private static List<double> Dict_list = new List<double>();
         private static List<string> Output = new List<string>();
 
-        public static List<string> Colour(Image Logo, bool AllPixels)
+        public static List<string> Colour(Image Logo, bool AllPixels, bool GetRGB)
         {
             ColourDic();
 
@@ -96,7 +95,6 @@ namespace Logo_Anl
             return Output; //Named the returning List output just to clarify that is what is returned from the colourimetic
         }
 
-
         public static void ColourStore(Color pixel)
         {
             ColoursIn.Add(pixel);
@@ -112,7 +110,7 @@ namespace Logo_Anl
             double l = L.L_transfer();
             if (l == 1 || l == 0)
             {
-                if (l == 1)
+                if (l != 1)
                 {
                     ColourNamed = "Black";
 
@@ -145,6 +143,59 @@ namespace Logo_Anl
             hsl.S = c.GetSaturation();
 
             return hsl;
+        }
+
+        public static Color HSL_to_RGB(HSL hsl)
+        {
+            double r = 0, g = 0, b = 0;
+            double temp1, temp2;
+
+            if (hsl.L == 0)
+            {
+                r = g = b = 0;
+            }
+
+            else
+            {
+                if (hsl.S == 0)
+                {
+                    r = g = b = hsl.L;
+                }
+
+                else
+                {
+                    temp2 = ((hsl.L <= 0.5) ? hsl.L * (1.0 + hsl.S) : hsl.L + hsl.S - (hsl.L * hsl.S));
+                    temp1 = 2.0 * hsl.L - temp2;
+
+                    double[] t3 = new double[] { hsl.H + 1.0 / 3.0, hsl.H, hsl.H - 1.0 / 3.0 };
+                    double[] clr = new double[] { 0, 0, 0 };
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (t3[i] < 0)
+                            t3[i] += 1.0;
+
+                        if (t3[i] > 1)
+                            t3[i] -= 1.0;
+
+                        if (6.0 * t3[i] < 1.0)
+                            clr[i] = temp1 + (temp2 - temp1) * t3[i] * 6.0;
+
+                        else if (2.0 * t3[i] < 1.0)
+                            clr[i] = temp2;
+
+                        else if (3.0 * t3[i] < 2.0)
+                            clr[i] = (temp1 + (temp2 - temp1) * ((2.0 / 3.0) - t3[i]) * 6.0);
+
+                        else
+                            clr[i] = temp1;
+                    }
+                    r = clr[0];
+                    g = clr[1];
+                    b = clr[2];
+                }
+            }
+            return Color.FromArgb((int)(255 * r), (int)(255 * g), (int)(255 * b));
         }
     }
 

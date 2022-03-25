@@ -7,7 +7,7 @@ namespace Logo_Anl
 {
     public partial class Registration : Form
     {
-        SqlConnection con;
+        SqlConnection conn = new SqlConnection(Program.connString);
         SqlCommand cmd;
         SqlDataReader dr;
 
@@ -18,8 +18,7 @@ namespace Logo_Anl
 
         private void Registration_Load(object sender, EventArgs e)
         {
-            con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Thom\source\repos\Logo_Anl\Logo_Anl\UserBase.mdf;Integrated Security=True");
-            con.Open();
+            conn.Open();
         }
 
         private void EntrUsrNmTxtBx_TextChanged(object sender, EventArgs e)
@@ -39,11 +38,11 @@ namespace Logo_Anl
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (CnfrmPsswrdTxtBx.Text != string.Empty || EntrPsswrdTxtBx.Text != string.Empty || EntrUsrNmTxtBx.Text != string.Empty)
+            if (CnfrmPsswrdTxtBx.Text != string.Empty || EntrPsswrdTxtBx.Text != string.Empty || EntrUsrNmTxtBx.Text != string.Empty || EntrEmail.Text != string.Empty)
             {
                 if (EntrPsswrdTxtBx.Text == CnfrmPsswrdTxtBx.Text)
                 {
-                    cmd = new SqlCommand("select * from UserTable where username='" + EntrUsrNmTxtBx.Text + "'", con);
+                    cmd = new SqlCommand("select * from UserTable where username='" + EntrUsrNmTxtBx.Text + "'", conn);
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -53,12 +52,22 @@ namespace Logo_Anl
                     else
                     {
                         dr.Close();
-                        cmd = new SqlCommand("insert into UserTable values(@username,@password)", con);
-                        cmd.Parameters.AddWithValue("username", EntrUsrNmTxtBx.Text);
-                        cmd.Parameters.AddWithValue("password", EntrPsswrdTxtBx.Text);
-                        cmd.ExecuteNonQuery();
-                        Directory.CreateDirectory(@$".\..\..\..\{EntrUsrNmTxtBx.Text}");
+
+                        cmd = new SqlCommand("dbo.register", conn);
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@username", EntrUsrNmTxtBx.Text.Trim());
+                        cmd.Parameters.AddWithValue("@password", EntrPsswrdTxtBx.Text.Trim());
+                        cmd.Parameters.AddWithValue("@email", EntrEmail.Text.Trim());
+                        conn.Close();
+
                         MessageBox.Show("Your Account is created . Please login now.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //cmd = new SqlCommand("insert into UserTable values(@username,@password,@email)", conn);
+                        //cmd.Parameters.AddWithValue("username", EntrUsrNmTxtBx.Text);
+                        //cmd.Parameters.AddWithValue("password", EntrPsswrdTxtBx.Text);
+                        //cmd.Parameters.AddWithValue("email", EntrEmail.Text);
+                        //cmd.ExecuteNonQuery();
+                        //Directory.CreateDirectory(@$".\..\..\..\{EntrUsrNmTxtBx.Text}");
+                        //MessageBox.Show("Your Account is created . Please login now.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
@@ -77,6 +86,16 @@ namespace Logo_Anl
             this.Hide();
             Login login = new Login();
             login.ShowDialog();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

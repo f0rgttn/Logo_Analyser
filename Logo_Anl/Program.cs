@@ -19,5 +19,7 @@ namespace Logo_Anl
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Registration());
         }
+
+        static public string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Thom\source\repos\Logo_Anl\Logo_Anl\UserBase.mdf;Integrated Security=True"; //connection string for SQLConnection
     }
 }

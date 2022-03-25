@@ -6,6 +6,8 @@ using System.Linq;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Vision;
+using System.Windows.Forms;
+
 
 namespace Logo_Anl
 {
@@ -64,17 +66,9 @@ namespace Logo_Anl
             return Business_Models;
         }
 
-        //EVal method is used to cross-validate (CV) single datasets, so to evaluate and get the accuracy metrics of the model
-        private static void Eval(MLContext mLContext, IDataView trainingDataView, IEstimator<ITransformer> trainPL)
-        {
-            Console.WriteLine("Cross-validation \n");
-            var CV_Results = mLContext.MulticlassClassification.CrossValidate(trainingDataView, trainPL, numberOfFolds: 5, labelColumnName: "Label");
-            PrintAvgMetrics(CV_Results);
-        }
-
         private static void Save_Mod(MLContext mLContext, ITransformer mlModel, string modelRelativePath, DataViewSchema modelInputSchem)
         {
-            Console.WriteLine("Saving model");
+            MessageBox.Show("Saving model");
             mlContext.Model.Save(mlModel, modelInputSchem, GetPath(modelRelativePath));
         }
 
@@ -87,6 +81,14 @@ namespace Logo_Anl
             return Full_Path;
         }
 
+        //EVal method is used to cross-validate (CV) single datasets, so to evaluate and get the accuracy metrics of the model
+        //Methods from this point onwards are for testing classifier and the user will not have much to do with
+        private static void Eval(MLContext mLContext, IDataView trainingDataView, IEstimator<ITransformer> trainPL)
+        {
+            MessageBox.Show("Cross-validation \n");
+            var CV_Results = mLContext.MulticlassClassification.CrossValidate(trainingDataView, trainPL, numberOfFolds: 5, labelColumnName: "Label");
+            PrintAvgMetrics(CV_Results);
+        }
 
         //method will print the metrics for the multi class classification
         //MulticlassClassificationMetrics evaluates the results for the multiclass training seen used in method Eval
@@ -150,8 +152,5 @@ namespace Logo_Anl
             double confidenceInterval = 1.96 * CalcStandardDeviation(values) / Math.Sqrt((values.Count() - 1));
             return confidenceInterval; //returning confidence interval of 95
         }
-
-
-
     }
 }

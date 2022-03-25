@@ -35,7 +35,11 @@ namespace Logo_Anl
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colourimetricsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getAllValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rGBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hSLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getUniqueValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rGBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hSLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.objectDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.detectObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,14 +80,14 @@ namespace Logo_Anl
             // loadLogoToolStripMenuItem
             // 
             this.loadLogoToolStripMenuItem.Name = "loadLogoToolStripMenuItem";
-            this.loadLogoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadLogoToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.loadLogoToolStripMenuItem.Text = "Load Logo";
             this.loadLogoToolStripMenuItem.Click += new System.EventHandler(this.loadLogoToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -98,17 +102,51 @@ namespace Logo_Anl
             // 
             // getAllValuesToolStripMenuItem
             // 
+            this.getAllValuesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rGBToolStripMenuItem,
+            this.hSLToolStripMenuItem});
             this.getAllValuesToolStripMenuItem.Name = "getAllValuesToolStripMenuItem";
-            this.getAllValuesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.getAllValuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.getAllValuesToolStripMenuItem.Text = "Get all values";
             this.getAllValuesToolStripMenuItem.Click += new System.EventHandler(this.getAllValuesToolStripMenuItem_Click);
             // 
+            // rGBToolStripMenuItem
+            // 
+            this.rGBToolStripMenuItem.Name = "rGBToolStripMenuItem";
+            this.rGBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rGBToolStripMenuItem.Text = "RGB";
+            this.rGBToolStripMenuItem.Click += new System.EventHandler(this.rGBToolStripMenuItem_Click);
+            // 
+            // hSLToolStripMenuItem
+            // 
+            this.hSLToolStripMenuItem.Name = "hSLToolStripMenuItem";
+            this.hSLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hSLToolStripMenuItem.Text = "HSL";
+            this.hSLToolStripMenuItem.Click += new System.EventHandler(this.hSLToolStripMenuItem_Click);
+            // 
             // getUniqueValuesToolStripMenuItem
             // 
+            this.getUniqueValuesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rGBToolStripMenuItem1,
+            this.hSLToolStripMenuItem1});
             this.getUniqueValuesToolStripMenuItem.Name = "getUniqueValuesToolStripMenuItem";
-            this.getUniqueValuesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.getUniqueValuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.getUniqueValuesToolStripMenuItem.Text = "Get unique values";
             this.getUniqueValuesToolStripMenuItem.Click += new System.EventHandler(this.getUniqueValuesToolStripMenuItem_Click);
+            // 
+            // rGBToolStripMenuItem1
+            // 
+            this.rGBToolStripMenuItem1.Name = "rGBToolStripMenuItem1";
+            this.rGBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.rGBToolStripMenuItem1.Text = "RGB";
+            this.rGBToolStripMenuItem1.Click += new System.EventHandler(this.rGBToolStripMenuItem1_Click);
+            // 
+            // hSLToolStripMenuItem1
+            // 
+            this.hSLToolStripMenuItem1.Name = "hSLToolStripMenuItem1";
+            this.hSLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.hSLToolStripMenuItem1.Text = "HSL";
+            this.hSLToolStripMenuItem1.Click += new System.EventHandler(this.hSLToolStripMenuItem1_Click);
             // 
             // objectDetectionToolStripMenuItem
             // 
@@ -228,5 +266,9 @@ namespace Logo_Anl
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripMenuItem classifyBusinessTypeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rGBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hSLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rGBToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hSLToolStripMenuItem1;
     }
 }

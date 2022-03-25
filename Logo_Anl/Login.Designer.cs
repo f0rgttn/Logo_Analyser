@@ -35,6 +35,7 @@ namespace Logo_Anl
             this.EntrPsswrd = new System.Windows.Forms.TextBox();
             this.UserNull = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.ForgottenPassword = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUserName
@@ -96,11 +97,28 @@ namespace Logo_Anl
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
+            // ForgottenPassword
+            // 
+            this.ForgottenPassword.BackColor = System.Drawing.SystemColors.Control;
+            this.ForgottenPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ForgottenPassword.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.ForgottenPassword.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.ForgottenPassword.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ForgottenPassword.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.ForgottenPassword.Location = new System.Drawing.Point(384, 98);
+            this.ForgottenPassword.Name = "ForgottenPassword";
+            this.ForgottenPassword.Size = new System.Drawing.Size(139, 23);
+            this.ForgottenPassword.TabIndex = 6;
+            this.ForgottenPassword.Text = "Forgot password?";
+            this.ForgottenPassword.UseVisualStyleBackColor = false;
+            this.ForgottenPassword.Click += new System.EventHandler(this.ForgotPassword_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 263);
+            this.Controls.Add(this.ForgottenPassword);
             this.Controls.Add(this.UserNull);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.EntrPsswrd);
@@ -125,5 +143,6 @@ namespace Logo_Anl
         private System.Windows.Forms.TextBox EntrPsswrd;
         private System.Windows.Forms.Button UserNull;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button ForgottenPassword;
     }
 }
