@@ -55,7 +55,7 @@ namespace Logo_Anl
         Net Model = null;
         List<string> ClassLabels = null;
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void ObjDetectionLoadModel_Click(object sender, EventArgs e)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Logo_Anl
         }
 
         //Object Detection
-        private void detectObjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void detectObjects_Click(object sender, EventArgs e)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace Logo_Anl
                 {
                     var mat = vectorOfMat[k];
                     //make mat into 2d list of floats
-                    var data = HelperClass.ArrayTo2DList(mat.GetData());
+                    var data = ArrayTo2DList(mat.GetData());
 
                     //loop through all data, look through each column, if data score > confidence score
                     //consider for further processing otherwise reject it
@@ -194,6 +194,25 @@ namespace Logo_Anl
             }
         }
 
+        private static List<float[]> ArrayTo2DList(Array array)
+        {
+            int rows = array.GetLength(0);
+            int cols = array.GetLength(1);
+            List<float[]> list = new List<float[]>();
+            List<float> temp = new List<float>();
+
+            for (int i = 0; i < rows; i++)
+            {
+                temp.Clear();
+                for (int j = 0; j < cols; j++)
+                {
+                    temp.Add(float.Parse(array.GetValue(i, j).ToString()));
+                }
+                list.Add(temp.ToArray());
+            }
+            return list;
+        }
+
         //Colourimetrics
 
 
@@ -208,29 +227,28 @@ namespace Logo_Anl
             
         }
         //This will allow for the user 
-        private void rGBToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AllValuesRGB_Click(object sender, EventArgs e)
         {
             GetAllColourValue(true);
         }
 
-        private void hSLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AllValuesHSL_Click(object sender, EventArgs e)
         {
             GetAllColourValue(false);
         }
         //This will allow for the user to get the unique colour values only with data type RGB
-        private void rGBToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void UniqueValuesRGB_Click(object sender, EventArgs e)
         {
             GetUniqueColourValues(true);
         }
         //This will allow for the user to get the unique colour values only with data type HSL
-        private void hSLToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void UniqueValuesHSL_Click(object sender, EventArgs e)
         {
             GetUniqueColourValues(false);
         }
 
         private void GetAllColourValue(bool GetRGB)
         {
-            CheckPathFilled();
             Image Logo = Image.FromFile(GetLogoPath());
             List<string> pixel_colours = Colourimetrics.Colour(Logo, true, GetRGB);
             colourimetricOutput(pixel_colours, Logo);
@@ -238,7 +256,6 @@ namespace Logo_Anl
 
         private void GetUniqueColourValues(bool GetRGB)
         {
-            CheckPathFilled();
             Image Logo = Image.FromFile(GetLogoPath());
             List<string> pixel_colours = Colourimetrics.Colour(Logo, false, GetRGB);
             colourimetricOutput(pixel_colours, Logo);
@@ -253,19 +270,18 @@ namespace Logo_Anl
         }
 
         //For classifying business types.
-        private void classifyBusinessTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void classifyBusiness_Click(object sender, EventArgs e)
         {
             try
             {
                 Stack<string> Output = null;
                 CheckPathFilled();
                 string Logo = GetLogoPath();
-                ML_Main.ML_Hub(Output, Logo);
+                Queue<string> BusinessClassification = ClassifyBusiness.BusinessClassifier(Logo);
 
-                while (Output.Count != 0)
+                while (BusinessClassification.Count != 0)
                 {
-                    richTextBox1.Text = Output.Peek();
-                    Output.Pop();
+                    richTextBox1.Text = BusinessClassification.Dequeue();
                 }
             }
             catch (Exception ex)
@@ -276,13 +292,22 @@ namespace Logo_Anl
         }
 
         // readTextToolStripMenuItem_Click method returns the text in a logo to the user via optical character recognition ("OCR")
-        private void readTextToolStripMenuItem_Click(object sender, EventArgs e)
+        private void readText_Click(object sender, EventArgs e)
         {
             try
             {
-                //string logopath = GetLogoPath();
-                //logopath = Image.FromFile(logopath);
+                string logopath = GetLogoPath();
+                Image Logo = Image.FromFile(logopath);
+                //uses tesseract to read characters from logos
                 //using (var objectOcr = OcrApi.Create())
+                //{
+                //    objectOcr.Init(Patagames.Ocr.Enums.Languages.English);
+
+                //    string plaintext = objectOcr.GetTextFromImage(LogoPath);
+                //    pictureBox1.Image = logoWithText;
+                //    richTextBox1.Visible = true;
+                //    richTextBox1.Text = plaintext;
+                //}
 
             }
             catch (Exception ex)
@@ -293,7 +318,7 @@ namespace Logo_Anl
         }
 
         //File -> load image
-        private void loadLogoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void loadLogo_Click(object sender, EventArgs e)
         {
             SetLogoPath();
             Bitmap logo = new Bitmap(GetLogoPath());
@@ -301,10 +326,16 @@ namespace Logo_Anl
 
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exit_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+       
     }
 
     class History

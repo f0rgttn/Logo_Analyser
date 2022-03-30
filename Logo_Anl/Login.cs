@@ -7,7 +7,7 @@ namespace Logo_Anl
     public partial class Login : Form
     {
         //pull the sql connection string from program.cs
-        SqlConnection conn = new SqlConnection(Program.connString); //initially conn had to be written multiple time, but by pulling from a known string it tidies up the program
+        SqlConnection conn = new SqlConnection(AnalyserStartUp.connString); //initially conn had to be written multiple time, but by pulling from a known string it tidies up the program
         SqlCommand cmd;
        
         public Login()
@@ -52,22 +52,6 @@ namespace Logo_Anl
                 {
                     MessageBox.Show("Invalid Credentials");
                 }
-               
-                //dr = cmd.ExecuteReader();
-                //if (dr.Read())
-                //{
-                //    dr.Close();
-                //    this.Hide();
-                //    userName = EntrUsrNm.Text;
-                //    MenuScreen menuScreen = new MenuScreen();
-                //    menuScreen.ShowDialog();
-                //}
-                //else
-                //{
-                //    dr.Close();
-                //    MessageBox.Show("No Account avilable with this username and password ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
-
             }
             else
             {

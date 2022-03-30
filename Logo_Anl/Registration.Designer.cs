@@ -117,7 +117,7 @@ namespace Logo_Anl
             this.btnExistingCustomer.TabIndex = 10;
             this.btnExistingCustomer.Text = "Have Account? Login Now";
             this.btnExistingCustomer.UseVisualStyleBackColor = true;
-            this.btnExistingCustomer.Click += new System.EventHandler(this.btnExistingCustomer_Click);
+            this.btnExistingCustomer.Click += new System.EventHandler(this.btnExistingUser_Click);
             // 
             // EntrEmail
             // 

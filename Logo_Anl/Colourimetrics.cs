@@ -39,6 +39,7 @@ namespace Logo_Anl
         private static List<Color> ColoursIn = new List<Color>();
         private static List<Color> ColoursOnce = new List<Color>();
         private static List<double> Dict_list = new List<double>();
+        private static List<string> Coordinates = new List<string>();
         private static List<string> Output = new List<string>();
 
         public static List<string> Colour(Image Logo, bool AllPixels, bool GetRGB)
@@ -56,6 +57,7 @@ namespace Logo_Anl
                 for (int j = 0; j < logo.Height; j++)
                 {
                     var pixel = logo.GetPixel(i, j);
+                    Coordinates.Add($"({i}, {j})");
                     ColourStore(pixel);
                     // Console.WriteLine(ColoursIn[i * j].ToString());
                 }
@@ -260,6 +262,4 @@ namespace Logo_Anl
             }
         }
     }
-
-
 }

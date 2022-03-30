@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Logo_Anl
 {
-    static class Program
+    static class AnalyserStartUp
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -20,6 +20,6 @@ namespace Logo_Anl
             Application.Run(new Registration());
         }
 
-        static public string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Thom\source\repos\Logo_Anl\Logo_Anl\UserBase.mdf;Integrated Security=True"; //connection string for SQLConnection
+        static public string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+@"C:\Users\Thom\Documents\sixth form\Computer science\Thom Johnson NEA\Logo_Anl\Logo_Anl\UserBase.mdf"+";Integrated Security=True"; //connection string for SQLConnection
     }
 }

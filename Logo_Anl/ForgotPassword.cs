@@ -8,7 +8,7 @@ namespace Logo_Anl
 {
     public partial class ForgotPassword : Form
     {
-        SqlConnection conn = new SqlConnection(Program.connString); 
+        SqlConnection conn = new SqlConnection(AnalyserStartUp.connString); 
         SqlCommand cmd;
         string RandToken;
         public static string to;
@@ -19,7 +19,7 @@ namespace Logo_Anl
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ConfirmPasswordReset_click(object sender, EventArgs e)
         {
 
             if(textBox1.Text  != string.Empty || textBox2.Text != string.Empty)

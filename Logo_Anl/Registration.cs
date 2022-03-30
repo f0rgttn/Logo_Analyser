@@ -2,12 +2,14 @@
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+
 
 namespace Logo_Anl
 {
     public partial class Registration : Form
     {
-        SqlConnection conn = new SqlConnection(Program.connString);
+        SqlConnection conn = new SqlConnection(AnalyserStartUp.connString);
         SqlCommand cmd;
         SqlDataReader dr;
 
@@ -52,22 +54,39 @@ namespace Logo_Anl
                     else
                     {
                         dr.Close();
+                        cmd = new SqlCommand("select * from UserTable where email='" + EntrEmail.Text + "'", conn);
+                        dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            dr.Close();
+                            MessageBox.Show("Email already exist please try another ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            dr.Close();
+                            int PasswordLength = EntrPsswrdTxtBx.Text.Length;
+                            switch (PasswordLength)
+                            {
+                                case int n when n >= 6:
+                                    //Regex rgx = new Regex("[^A-Za-z0-9]");
+                                    //bool CheckSpecialCharacter = rgx.IsMatch(EntrPsswrdTxtBx.Text);
+                                    if (CheckForNums(EntrPsswrdTxtBx.Text, false) == true /*&& CheckSpecialCharacter == true*/)
+                                    {
+                                        cmd = new SqlCommand("dbo.register", conn);
+                                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                                        cmd.Parameters.AddWithValue("@username", EntrUsrNmTxtBx.Text.Trim());
+                                        cmd.Parameters.AddWithValue("@password", EntrPsswrdTxtBx.Text.Trim());
+                                        cmd.Parameters.AddWithValue("@email", EntrEmail.Text.Trim());
+                                        conn.Close();
 
-                        cmd = new SqlCommand("dbo.register", conn);
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@username", EntrUsrNmTxtBx.Text.Trim());
-                        cmd.Parameters.AddWithValue("@password", EntrPsswrdTxtBx.Text.Trim());
-                        cmd.Parameters.AddWithValue("@email", EntrEmail.Text.Trim());
-                        conn.Close();
-
-                        MessageBox.Show("Your Account is created . Please login now.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //cmd = new SqlCommand("insert into UserTable values(@username,@password,@email)", conn);
-                        //cmd.Parameters.AddWithValue("username", EntrUsrNmTxtBx.Text);
-                        //cmd.Parameters.AddWithValue("password", EntrPsswrdTxtBx.Text);
-                        //cmd.Parameters.AddWithValue("email", EntrEmail.Text);
-                        //cmd.ExecuteNonQuery();
-                        //Directory.CreateDirectory(@$".\..\..\..\{EntrUsrNmTxtBx.Text}");
-                        //MessageBox.Show("Your Account is created . Please login now.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        MessageBox.Show("Your Account is created . Please login now.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    break;
+                                case int n when n < 6:
+                                    MessageBox.Show("Please ensure your password has atleast one numeric digit ");
+                                    break;
+                            }
+                        }
                     }
                 }
                 else
@@ -81,7 +100,21 @@ namespace Logo_Anl
             }
         }
 
-        private void btnExistingCustomer_Click(object sender, EventArgs e)
+        //Password must have a special character
+        private static bool CheckForNums(string Password, bool c)
+        {
+            if (Password == "")
+            {
+                return c;
+            }
+            else
+            {
+                c = Char.IsDigit(Password[0]);
+                return CheckForNums(Password.Substring(1), c);
+            }
+        }
+
+            private void btnExistingUser_Click(object sender, EventArgs e)
         {
             this.Hide();
             Login login = new Login();

@@ -41,7 +41,7 @@ namespace Logo_Anl
             this.rGBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hSLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.objectDetectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObjDetectionLoadModel_click = new System.Windows.Forms.ToolStripMenuItem();
             this.detectObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classifyBusinessTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,14 +82,14 @@ namespace Logo_Anl
             this.loadLogoToolStripMenuItem.Name = "loadLogoToolStripMenuItem";
             this.loadLogoToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.loadLogoToolStripMenuItem.Text = "Load Logo";
-            this.loadLogoToolStripMenuItem.Click += new System.EventHandler(this.loadLogoToolStripMenuItem_Click);
+            this.loadLogoToolStripMenuItem.Click += new System.EventHandler(this.loadLogo_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exit_Click);
             // 
             // colourimetricsToolStripMenuItem
             // 
@@ -106,23 +106,23 @@ namespace Logo_Anl
             this.rGBToolStripMenuItem,
             this.hSLToolStripMenuItem});
             this.getAllValuesToolStripMenuItem.Name = "getAllValuesToolStripMenuItem";
-            this.getAllValuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.getAllValuesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.getAllValuesToolStripMenuItem.Text = "Get all values";
             this.getAllValuesToolStripMenuItem.Click += new System.EventHandler(this.getAllValuesToolStripMenuItem_Click);
             // 
             // rGBToolStripMenuItem
             // 
             this.rGBToolStripMenuItem.Name = "rGBToolStripMenuItem";
-            this.rGBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rGBToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.rGBToolStripMenuItem.Text = "RGB";
-            this.rGBToolStripMenuItem.Click += new System.EventHandler(this.rGBToolStripMenuItem_Click);
+            this.rGBToolStripMenuItem.Click += new System.EventHandler(this.AllValuesRGB_Click);
             // 
             // hSLToolStripMenuItem
             // 
             this.hSLToolStripMenuItem.Name = "hSLToolStripMenuItem";
-            this.hSLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hSLToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.hSLToolStripMenuItem.Text = "HSL";
-            this.hSLToolStripMenuItem.Click += new System.EventHandler(this.hSLToolStripMenuItem_Click);
+            this.hSLToolStripMenuItem.Click += new System.EventHandler(this.AllValuesHSL_Click);
             // 
             // getUniqueValuesToolStripMenuItem
             // 
@@ -130,46 +130,46 @@ namespace Logo_Anl
             this.rGBToolStripMenuItem1,
             this.hSLToolStripMenuItem1});
             this.getUniqueValuesToolStripMenuItem.Name = "getUniqueValuesToolStripMenuItem";
-            this.getUniqueValuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.getUniqueValuesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.getUniqueValuesToolStripMenuItem.Text = "Get unique values";
             this.getUniqueValuesToolStripMenuItem.Click += new System.EventHandler(this.getUniqueValuesToolStripMenuItem_Click);
             // 
             // rGBToolStripMenuItem1
             // 
             this.rGBToolStripMenuItem1.Name = "rGBToolStripMenuItem1";
-            this.rGBToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.rGBToolStripMenuItem1.Size = new System.Drawing.Size(96, 22);
             this.rGBToolStripMenuItem1.Text = "RGB";
-            this.rGBToolStripMenuItem1.Click += new System.EventHandler(this.rGBToolStripMenuItem1_Click);
+            this.rGBToolStripMenuItem1.Click += new System.EventHandler(this.UniqueValuesRGB_Click);
             // 
             // hSLToolStripMenuItem1
             // 
             this.hSLToolStripMenuItem1.Name = "hSLToolStripMenuItem1";
-            this.hSLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.hSLToolStripMenuItem1.Size = new System.Drawing.Size(96, 22);
             this.hSLToolStripMenuItem1.Text = "HSL";
-            this.hSLToolStripMenuItem1.Click += new System.EventHandler(this.hSLToolStripMenuItem1_Click);
+            this.hSLToolStripMenuItem1.Click += new System.EventHandler(this.UniqueValuesHSL_Click);
             // 
             // objectDetectionToolStripMenuItem
             // 
             this.objectDetectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
+            this.ObjDetectionLoadModel_click,
             this.detectObjectsToolStripMenuItem});
             this.objectDetectionToolStripMenuItem.Name = "objectDetectionToolStripMenuItem";
             this.objectDetectionToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.objectDetectionToolStripMenuItem.Text = "Object Detection";
             // 
-            // toolStripMenuItem2
+            // ObjDetectionLoadModel_click
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(151, 22);
-            this.toolStripMenuItem2.Text = "Load Model";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.ObjDetectionLoadModel_click.Name = "ObjDetectionLoadModel_click";
+            this.ObjDetectionLoadModel_click.Size = new System.Drawing.Size(180, 22);
+            this.ObjDetectionLoadModel_click.Text = "Load Model";
+            this.ObjDetectionLoadModel_click.Click += new System.EventHandler(this.ObjDetectionLoadModel_Click);
             // 
             // detectObjectsToolStripMenuItem
             // 
             this.detectObjectsToolStripMenuItem.Name = "detectObjectsToolStripMenuItem";
-            this.detectObjectsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.detectObjectsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.detectObjectsToolStripMenuItem.Text = "Detect Objects";
-            this.detectObjectsToolStripMenuItem.Click += new System.EventHandler(this.detectObjectsToolStripMenuItem_Click);
+            this.detectObjectsToolStripMenuItem.Click += new System.EventHandler(this.detectObjects_Click);
             // 
             // classificationToolStripMenuItem
             // 
@@ -184,14 +184,14 @@ namespace Logo_Anl
             this.classifyBusinessTypeToolStripMenuItem.Name = "classifyBusinessTypeToolStripMenuItem";
             this.classifyBusinessTypeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.classifyBusinessTypeToolStripMenuItem.Text = "Classify Business Type";
-            this.classifyBusinessTypeToolStripMenuItem.Click += new System.EventHandler(this.classifyBusinessTypeToolStripMenuItem_Click);
+            this.classifyBusinessTypeToolStripMenuItem.Click += new System.EventHandler(this.classifyBusiness_Click);
             // 
             // readTextToolStripMenuItem
             // 
             this.readTextToolStripMenuItem.Name = "readTextToolStripMenuItem";
             this.readTextToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.readTextToolStripMenuItem.Text = "Read Text";
-            this.readTextToolStripMenuItem.Click += new System.EventHandler(this.readTextToolStripMenuItem_Click);
+            this.readTextToolStripMenuItem.Click += new System.EventHandler(this.readText_Click);
             // 
             // panel1
             // 
@@ -216,6 +216,7 @@ namespace Logo_Anl
             this.pictureBox1.Size = new System.Drawing.Size(126, 90);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // richTextBox1
             // 
@@ -258,7 +259,7 @@ namespace Logo_Anl
         private System.Windows.Forms.ToolStripMenuItem getAllValuesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getUniqueValuesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem objectDetectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ObjDetectionLoadModel_click;
         private System.Windows.Forms.ToolStripMenuItem detectObjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem classificationToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;

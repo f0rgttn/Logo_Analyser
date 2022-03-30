@@ -7,7 +7,7 @@ namespace Logo_Anl
     public partial class ResetPassword : Form
     {
         SqlCommand cmd;
-        SqlConnection conn = new SqlConnection(Program.connString);
+        SqlConnection conn = new SqlConnection(AnalyserStartUp.connString);
         string username = ForgotPassword.username;
 
         string Token;
